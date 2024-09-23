@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import productRoute from "./routes/productRoute";
-// import cartRoute from "./routes/cartRoute";
+import cartRoute from "./routes/cartRoute"; 
 import { seedInitialProducts } from "./services/productService";
 
 dotenv.config();
@@ -21,11 +21,8 @@ mongoose
 // Seed the products to database
 seedInitialProducts();
 
-
-// connectDB();
 app.use("/product", productRoute);
-// app.use("/cart", cartRoute);
-
+app.use("/cart", cartRoute); // Use cart route
 
 app.listen(port, () => {
   console.log(`Server is running at: http://localhost:${port}`);
