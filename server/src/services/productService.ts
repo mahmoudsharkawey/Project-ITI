@@ -4,6 +4,10 @@ export const getAllProducts = async () => {
   return await productModel.find();
 };
 
+export const getProductById = async (id: number) => {
+  return await productModel.findOne({ id });
+};
+
 export const seedInitialProducts = async () => {
   try {
     const products = [

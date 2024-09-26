@@ -1,1 +1,22 @@
-<p>product-info works!</p>
+<div class="container mx-auto p-4">
+  <div *ngIf="product; else loading" class="bg-white shadow-md rounded-lg p-6 flex">
+    <img [src]="product.image" alt="{{ product.title }}" class="w-64 h-64 object-center rounded-md mr-6" />
+    <div class="flex-1">
+      <h2 class="text-2xl font-bold text-gray-800">{{ product.title }}</h2>
+      <p class="text-lg font-semibold text-green-500   mt-4">${{ product.price | number:'1.2-2' }}</p>
+      <p class="text-gray-700 mt-2">{{ product.description }}</p>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="flex justify-center items-center h-64">
+      <p class="text-lg text-gray-600">Loading product details...</p>
+    </div>
+  </ng-template>
+
+  <div *ngIf="errorMessage" class="text-red-500 mt-4">
+    <p class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
+      {{ errorMessage }}
+    </p>
+  </div>
+</div>
