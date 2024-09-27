@@ -9,7 +9,7 @@ import { ProductsComponent } from './components/products/products.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NavBarComponent,HeroComponent,FooterComponent,ProductInfoComponent,ProductsComponent],
+  imports: [RouterOutlet,NavBarComponent,HeroComponent,FooterComponent,ProductInfoComponent,ProductsComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

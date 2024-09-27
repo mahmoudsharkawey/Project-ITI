@@ -1,0 +1,13 @@
+.error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  button {
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #2563eb; /* Tailwind CSS blue-600 */
+  }
+  
