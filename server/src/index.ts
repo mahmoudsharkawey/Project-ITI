@@ -8,7 +8,7 @@ import { seedInitialProducts } from "./services/productService";
 
 dotenv.config();
 const app = express();
-const port = 3030;
+const port = 3031;
 
 app.use(express.json());
 app.use(cors());

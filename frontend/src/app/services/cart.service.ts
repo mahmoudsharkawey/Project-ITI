@@ -7,7 +7,7 @@ import { ICart } from './cart.model';
   providedIn: 'root'
 })
 export class CartService {
-  private cartApiUrl = 'http://localhost:3030/cart';
+  private cartApiUrl = 'http://localhost:3031/cart';
 
   constructor(private http: HttpClient) {}
 
