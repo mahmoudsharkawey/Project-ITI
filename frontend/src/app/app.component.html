@@ -1,7 +1,7 @@
 <div>
     <app-nav-bar></app-nav-bar>
-    <app-hero></app-hero>
+    <app-hero *ngIf="!hideHero "  ></app-hero>
     <router-outlet></router-outlet>
-    <!-- <app-products></app-products> -->
-    <app-footer></app-footer>
-</div>
+     <app-footer></app-footer>
+  </div>
+ 

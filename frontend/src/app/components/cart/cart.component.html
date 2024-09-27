@@ -1,35 +1,39 @@
 <div class="container mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6 text-center">Your Cart</h1>
+  <h1 class="text-3xl font-bold mb-6 text-center">Your Cart</h1>
 
-    <div *ngIf="cart; else loading" class="bg-white shadow-md rounded-lg p-4">
-      <ul class="space-y-4">
-        <li *ngFor="let item of cart.items" class="flex justify-between items-center p-4 border-b">
-          <div>
-            <p class="font-semibold">Product ID: {{ item.productId }}</p>
-            <p>Quantity: {{ item.quantity }}</p>
-          </div>
-          <button 
-            class="ml-4 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition duration-300"
-            (click)="deleteProduct(item.productId)">
-            Delete
-          </button>
-        </li>
-      </ul>
-      <div class="mt-4">
+  <div *ngIf="cart; else loading" class="bg-white shadow-md rounded-lg p-4">
+    <ul class="space-y-4">
+      <li *ngFor="let item of cart.items" class="flex justify-between items-center p-4 border-b">
+        <div>
+          <p class="font-semibold">Product ID: {{ item.productId }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+        </div>
+        <button 
+          class="ml-4 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition duration-300"
+          (click)="deleteProduct(item.productId)">
+          Delete
+        </button>
+      </li>
+    </ul>
+    
+    <div class="mt-4 flex justify-center">
+      <div class="text-center">
         <p class="font-semibold">Total Quantity: {{ cart.totalQuantity }}</p>
         <p class="text-xl">Total Price: ${{ cart.totalPrice | number:'1.2-2' }}</p>
       </div>
     </div>
+    
+  </div>
 
-    <ng-template #loading>
-      <div class="flex justify-center items-center h-64">
-        <p class="text-lg text-gray-600">Loading cart items...</p>
-      </div>
-    </ng-template>
-
-    <div *ngIf="errorMessage" class="text-red-500 mt-4">
-      <p class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
-        {{ errorMessage }}
-      </p>
+  <ng-template #loading>
+    <div class="flex justify-center items-center h-64">
+      <p class="text-lg text-gray-600">Loading cart items...</p>
     </div>
+  </ng-template>
+
+  <div *ngIf="errorMessage" class="text-red-500 mt-4">
+    <p class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
+      {{ errorMessage }}
+    </p>
+  </div>
 </div>
