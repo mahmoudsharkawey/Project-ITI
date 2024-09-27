@@ -1,9 +1,22 @@
 <section class="px-12 py-12">
   <h2 class="text-2xl text-center font-bold mb-4 py-4">Featured Products</h2>
 
-  <div class="flex justify-center items-center ">
+  <div class="flex justify-end items-center mb-4 ">
+    <input
+      type="text"
+      placeholder="Search products..."
+      [(ngModel)]="searchTerm"
+      class="border rounded px-4 py-2 w-80"
+    />
+    <select [(ngModel)]="selectedCategory" (change)="filterProducts()" class="border rounded px-4 py-2 ml-4">
+      <option value="">All Categories</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
+
+  <div class="flex justify-center items-center">
     <div class="mt-0 grid justify-center items-center lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-48">
-      <a *ngFor="let product of products" [routerLink]="['/product', product.id]" class="max-w-[300px] flex flex-col gap-0 py-4">
+      <a *ngFor="let product of filteredProducts()" [routerLink]="['/product', product.id]" class="max-w-[300px] flex flex-col gap-0 py-4">
         <div class="relative">
           <img [src]="product.image" [alt]="product.title + ' product image'" class="w-full h-64 rounded-md" />
         </div>
@@ -12,7 +25,6 @@
             <h3 class="text-xl font-bold text-white">{{ product.title }}</h3>
             <span class="text-lg font-semibold text-white">${{ product.price }}</span>
           </div>
-          <!-- <div class="text-gray-200">{{ product.description }}</div> -->
         </div>
       </a>
     </div>
