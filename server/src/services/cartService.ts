@@ -1,4 +1,5 @@
 import cartModel from "../models/cartModel";
+import productModel from "../models/productModel";
 
 // Function to add a product to the cart
 export const addToCart = async (productId: number, quantity: number) => {
@@ -27,24 +28,50 @@ export const addToCart = async (productId: number, quantity: number) => {
 export const getCartItems = async () => {
   try {
     const items = await cartModel.find();
-    const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
 
-    // Assuming that getProductPrice is an async function
+    const itemsWithDetails = await Promise.all(
+      items.map(async (item) => {
+        const productDetails = await getProductDetails(item.productId);
+        return {
+          ...item.toObject(), // Convert Mongoose document to a plain object
+          productName: productDetails.name || 'Unknown Product',
+          productImage: productDetails.image || 'default-image-url.jpg',
+        };
+      })
+    );
+
+    const totalQuantity = itemsWithDetails.reduce((acc, item) => acc + item.quantity, 0);
+
     const totalPrice = await Promise.all(
-      items.map(async (item) => item.quantity * await getProductPrice(item.productId))
+      itemsWithDetails.map(async (item) => item.quantity * await getProductPrice(item.productId))
     ).then(prices => prices.reduce((acc, price) => acc + price, 0));
 
-    return { items, totalQuantity, totalPrice };
+    return { items: itemsWithDetails, totalQuantity, totalPrice };
   } catch (error) {
     console.error("Error fetching cart items:", error);
     throw new Error("Failed to retrieve cart items.");
   }
 };
 
+// Function to get product details
+async function getProductDetails(productId: number) {
+  const product = await productModel.findOne({ id: productId }); // Use 'id' if that is the field in your product schema
+  if (!product) {
+    return {
+      name: "Unknown Product",
+      image: "default-image-url.jpg", // Default image
+    };
+  }
+  return { name: product.title, image: product.image || "default-image-url.jpg" }; // Use default image if none exists
+}
+
 // Function to remove a product from the cart
 export const removeFromCart = async (productId: number) => {
   try {
-    await cartModel.deleteOne({ productId });
+    const result = await cartModel.deleteOne({ productId });
+    if (result.deletedCount === 0) {
+      throw new Error("No product found to remove.");
+    }
   } catch (error) {
     console.error("Error removing from cart:", error);
     throw new Error("Failed to remove item from cart.");
