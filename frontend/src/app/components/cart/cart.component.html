@@ -4,9 +4,12 @@
   <div *ngIf="cart; else loading" class="bg-white shadow-md rounded-lg p-4">
     <ul class="space-y-4">
       <li *ngFor="let item of cart.items" class="flex justify-between items-center p-4 border-b">
-        <div>
-          <p class="font-semibold">Product ID: {{ item.productId }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
+        <div class="flex items-center">
+          <img [src]="item.productImage" alt="{{ item.productName }}" class="w-16 h-16 object-cover mr-4">
+          <div>
+            <p class="font-semibold">{{ item.productName }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+          </div>
         </div>
         <button 
           class="ml-4 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition duration-300"
@@ -22,7 +25,6 @@
         <p class="text-xl">Total Price: ${{ cart.totalPrice | number:'1.2-2' }}</p>
       </div>
     </div>
-    
   </div>
 
   <ng-template #loading>

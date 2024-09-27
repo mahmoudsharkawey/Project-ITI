@@ -1,11 +1,12 @@
 export interface ICartItem {
-    productId: number; 
-    quantity: number;  
-  }
-  
-  export interface ICart {
-    items: ICartItem[]; 
-    totalQuantity: number; 
-    totalPrice: number; 
-  }
-  
+  productId: number;
+  quantity: number;
+  productName?: string;
+  productImage?: string;
+}
+
+export interface ICart {
+  items: ICartItem[];
+  totalQuantity: number;
+  totalPrice: number;
+}
