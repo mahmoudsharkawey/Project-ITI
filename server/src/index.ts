@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import productRoute from "./routes/productRoute";
-import cartRoute from "./routes/cartRoute"; 
+import cartRoute from "./routes/cartRoute";
 import { seedInitialProducts } from "./services/productService";
 
 dotenv.config();
@@ -14,7 +14,9 @@ app.use(express.json());
 app.use(cors());
 
 mongoose
-  .connect(process.env.DATABASE_URL || "")
+  .connect(
+    "mongodb+srv://youssefsalib311:cAi4mxiF5uwBX8rE@youssefservice.nl2yb.mongodb.net/e-commerces?retryWrites=true&w=majority&appName=YoussefService"
+  )
   .then(() => console.log("Mongo connected!"))
   .catch((err) => console.log("Failed to connect!", err));
 
