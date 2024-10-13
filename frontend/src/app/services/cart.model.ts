@@ -6,6 +6,7 @@ export interface ICartItem {
 }
 
 export interface ICart {
+  fillter(arg0: (item: any) => boolean): any;
   items: ICartItem[];
   totalQuantity: number;
   totalPrice: number;

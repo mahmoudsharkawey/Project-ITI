@@ -23,6 +23,7 @@ export class CartComponent implements OnInit {
   loadCartItems() {
     this.cartService.getCartItems().subscribe({
       next: (data: ICart) => {
+
         this.cart = data;
         this.errorMessage = null;
       },
@@ -32,7 +33,6 @@ export class CartComponent implements OnInit {
       },
     });
   }
-
   deleteProduct(productId: number): void {
     this.cartService.removeFromCart(productId).subscribe({
       next: () => {
@@ -42,5 +42,6 @@ export class CartComponent implements OnInit {
         console.error('Error deleting product', error);
       },
     });
+    this.loadCartItems();
   }
 }
